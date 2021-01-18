@@ -59,7 +59,7 @@ public class CalendarMain extends JFrame implements ItemListener{
 		for(int i=0; i<dayName.length; i++) {
 			JButton btn = new JButton(dayName[i]);
 			paneCenter.add(btn);
-			btn.setEnabled(false);
+			//btn.setEnabled(false);
 			if(i==0) {
 				btn.setForeground(Color.RED);
 			}else if(i==6) {
@@ -77,6 +77,7 @@ public class CalendarMain extends JFrame implements ItemListener{
 		for(int i=0; i<week; i++) {
 			JButton btn = new JButton(" ");
 			paneCenter.add(btn);
+			btn.setEnabled(false);
 		}
 		//날짜를 버튼에 넣기
 		for(int i =1; i<=lastDay; i++) {
@@ -112,7 +113,7 @@ public class CalendarMain extends JFrame implements ItemListener{
 	}
 	public Calendar getCalendar(int y, int m) {
 		Calendar now = Calendar.getInstance();
-		now.set(y,  m, 1);
+		now.set(y, m, 1);
 		return now;
 	}
 	public static void main(String[] args) {
