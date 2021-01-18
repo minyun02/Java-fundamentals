@@ -90,7 +90,7 @@ public class CalendarMain extends JFrame implements ItemListener{
 			}
 		}
 		//기본 세팅 
-		setSize(350,200);
+		setSize(400,350);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
