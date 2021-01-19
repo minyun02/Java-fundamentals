@@ -3,13 +3,17 @@ package java06_io;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
-public class FileCopy {
+import java.io.Serializable;
+// 								 직렬화를 하여 객체를 파일로 저장하도록 한다.
+public class FileCopy implements Serializable {
 
 	public FileCopy() {
+		
+	}
+	public void start() {
 		try {
 			//파일복사
-			File srcFile = new File("d://1.jpg"); //복사 할 파일을 가져옴
+			File srcFile = new File("d://1.png"); //복사 할 파일을 가져옴
 			File targetFile = new File("d://ioSample", srcFile.getName()); //복사할 곳
 			
 			FileInputStream fi = new FileInputStream(srcFile); //파일 불러오는 객체
@@ -28,8 +32,8 @@ public class FileCopy {
 		}
 	}
 
-	public static void main(String[] args) {
-		new FileCopy();
-	}
+//	public static void main(String[] args) {
+//		new FileCopy();
+//	}
 
 }

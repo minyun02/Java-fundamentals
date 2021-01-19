@@ -7,6 +7,11 @@
 /MenuTest02.class
 /SendButton.class
 /SwingMemo.class
-/.classpath
-/.gitignore
-/.project
+/GraphicsTest.class
+/GraphicsTest$MYCanvas.class
+/GraphicsTest$MyCanvas.class
+/ImageGraphics.class
+/ImageGraphics$MyCanvas.class
+/CalnedarSwing.class
+/CalenedarSwing.class
+/CalendarSwing.class

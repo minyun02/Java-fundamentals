@@ -43,7 +43,7 @@ public class CalendarMain03 extends JFrame implements ItemListener {
 		year = now.get(Calendar.YEAR);
 		month = now.get(Calendar.MONTH);
 		date = now.get(Calendar.DATE);
-		
+		now.set(year, month, 1);
 		for(int i=year-70; i<=year+70; i++) {
 			yearModel.addElement(i);
 		}
