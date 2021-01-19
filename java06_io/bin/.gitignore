@@ -1,14 +1,11 @@
 /BufferedReaderTest.class
 /DataInputOutputStreamTest.class
+/DataVO.class
 /FileReaderTest.class
 /FileTest.class
 /InputStreamReaderTest.class
 /InputStreamTest.class
-/java06_io/
-/ObjectOutputStreamTest.class
-/FileCopy.class
-/FileWriterTest.class
-/DataVo.class
-/DataVO.class
 /ObjectInputStreamTest.class
+/ObjectOutputStreamTest.class
 /RandomAccessFileTest.class
+/java06_io/

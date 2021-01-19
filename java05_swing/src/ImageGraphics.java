@@ -53,7 +53,7 @@ public class ImageGraphics extends JFrame implements ActionListener{
 			h = img.getHeight(this);
 			//이미지를 그림으로 그리기
 			if(selBtn.equals("원본그리기")) {
-				//				canvas좌표     image좌표  
+				//								canvas좌표    image좌표  
 				g.drawImage(img, 0, 0, w, h, 0, 0, w, h, this);
 			}else if(selBtn.equals("축소그리기")) {
 				g.drawImage(img, 0, 0, (w/2), (h/2), 0, 0, w, h, this);
@@ -66,6 +66,7 @@ public class ImageGraphics extends JFrame implements ActionListener{
 				g.drawImage(img, w, 0, 0, h, 0, 0, w, h, this);
 			}else if(selBtn.equals("상하뒤집기")) {
 				//숙제..
+				g.drawImage(img, 0, h, w, 0, 0,0, w, h, this);
 			}
 		}
 	}
