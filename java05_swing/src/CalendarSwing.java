@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
@@ -12,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CalendarSwing extends JFrame implements ItemListener{
+public class CalendarSwing extends JFrame implements ItemListener, ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 20);
 	//상단
 	JPanel selectPane = new JPanel();
@@ -26,7 +28,7 @@ public class CalendarSwing extends JFrame implements ItemListener{
 	JPanel centerPane = new JPanel(new BorderLayout());
 		JPanel titlePane = new JPanel(new GridLayout(1,7));
 			String[] title = {"일", "월", "화", "수", "목", "금", "토"};
-		JPanel dayPane = new JPanel(new GridLayout(0,7));	
+		JPanel dayPane = new JPanel(new GridLayout(0,7));
 		
 	//달력관련 데이터
 	Calendar date; //2021, 1, 19
@@ -66,8 +68,55 @@ public class CalendarSwing extends JFrame implements ItemListener{
 		//이벤트 등록
 		yearCombo.addItemListener(this);
 		monthCombo.addItemListener(this);
+		
+		prevBtn.addActionListener(this);
+		nextBtn.addActionListener(this);
 	}
 	//오버라이딩
+	public void actionPerformed(ActionEvent ae) {
+		Object obj = ae.getSource();
+		//해시코드를 비교하기때문에 ==이 가능
+		if(obj == prevBtn) { //이전 월
+			prevMonth();
+		}else if(obj == nextBtn) {
+			nextMonth();
+		}
+	}
+	public void nextMonth() {
+		if(month==12) {
+			year++;
+			month=1;
+		}else {
+			month++;
+		}
+		setDayReset();
+	}
+	public void prevMonth() {
+		if(month==1) {
+			year--;
+			month = 12;
+		}else {
+			month--;
+		}
+		setDayReset();
+	}
+	public void setDayReset() {
+		//이벤트등록 해제 -> 여기서 이벤트를 해제 안하면 프로그램이 꼬인다.
+		yearCombo.removeItemListener(this);
+		monthCombo.removeItemListener(this);
+		
+		yearCombo.setSelectedItem(year); //itemEvent가 발생한다.	
+		monthCombo.setSelectedItem(month);
+		
+		dayPane.setVisible(false);
+		dayPane.removeAll();
+		setDay(); //날짜 처리 함수 호출 
+		dayPane.setVisible(true);
+		
+		//이벤트 다시 등록
+		yearCombo.addItemListener(this);
+		monthCombo.addItemListener(this);
+	}
 	public void itemStateChanged(ItemEvent ie) {
 		year = (Integer)yearCombo.getSelectedItem();
 		month = (Integer)monthCombo.getSelectedItem();
@@ -98,6 +147,7 @@ public class CalendarSwing extends JFrame implements ItemListener{
 			//출력하는 날짜에 대한 요일
 			date.set(Calendar.DATE, day); // 19 -> 1
 			int w = date.get(Calendar.DAY_OF_WEEK);
+			System.out.println(w);
 			if(w==1) lbl.setForeground(Color.red);
 			if(w==7) lbl.setForeground(Color.blue);
 			dayPane.add(lbl);
