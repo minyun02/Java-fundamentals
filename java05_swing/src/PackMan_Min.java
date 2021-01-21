@@ -2,26 +2,31 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
 public class PackMan_Min extends JFrame implements KeyListener{
-	int sel = 2;
-	int x = 225;
-	int y = 225;
-	int mx;
-	int my;
+	MyCanvas mc = new MyCanvas();
+	Image img;
 	public PackMan_Min() {
-		Image img = Toolkit.getDefaultToolkit().getImage("img/packman.jpg");
+		super("???");
+		add(mc);
+		img = Toolkit.getDefaultToolkit().getImage("img/packman.jpg");
 		
 		setSize(500, 500);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
-	
+	public class MyCanvas extends Canvas {
+		public MyCanvas() {
+			
+		}
+		public void paint(Graphics g) {
+			g.drawImage(img, 0, 0, 50, 50,    0, 0, 50, 50, this);
+		}
+	}
 	public static void main(String[] args) {
 		new PackMan_Min();
 
