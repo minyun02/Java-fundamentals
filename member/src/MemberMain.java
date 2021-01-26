@@ -23,7 +23,9 @@ public class MemberMain extends JFrame implements ActionListener{
 		JPanel formLabelPane = new JPanel(new GridLayout(6,1));//mainNortPane의 west에 들어갈 라
 			String lbl[] =  {"번호", "이름", "전화번호", "이메일", "주소", "등록일"};
 		JPanel formCenterPane = new JPanel(new GridLayout(6,1));
+							//								번호 								이름				연락								이메
 			JTextField tf[] = {new JTextField(4), new JTextField(10), new JTextField(20), new JTextField(30),
+					//				주소							등록
 					new JTextField(50), new JTextField(15)};
 		
 	//JFrame - Center - buttons, JTable, searchbox
@@ -97,7 +99,23 @@ public class MemberMain extends JFrame implements ActionListener{
 			memberSearch();
 		}else if(eventBtn.equals("전체목록")) {
 			getMemberAll();
+		}else if(eventBtn.equals("추가")) {
+			setMember();
 		}
+	}
+	//회원 추가 
+	public void setMember() {
+		//폼의 데이터를 VO에 세팅 
+		MemberVO vo = new MemberVO( tf[1].getText(), tf[2].getText(), tf[3].getText(), tf[4].getText());
+
+		//이름과 연락처가 있을때 만 데이터베이스에 추가한다.
+		if(vo.getUsername().equals("") || vo.getTel().equals("")) {
+			JOptionPane.showMessageDialog(this, "이름과 연락처는 반드시 입력하여야 합니다.");
+		}else if(vo.getUsername().length()>4) {// 홍길동 
+			JOptionPane.showMessageDialog(this, "이름은 4글자 이하로 등록이 가능합니다");
+		}else {
+		
+		
 	}
 	//회원 검색
 	public void memberSearch() {

@@ -65,4 +65,29 @@ public class MemberDAO extends DBConn{
 		}
 		return lst;
 	}
+	
+	//회원 등록 메소드
+	public int memberInsert(MemberVO vo) {
+		int result = 0;
+		try {
+			getConn();
+			
+			sql = "insert into member(num, username, tel, addr, email, writedate "
+					+ "values(memSq.nextval, ?, ?, ? ,?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUsername());
+			pstmt.setString(2, vo.getTel());
+			pstmt.setString(3, vo.getAddr());
+			pstmt.setString(4, vo.getEmail());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return result;
+	}
 }
