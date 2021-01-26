@@ -30,9 +30,6 @@ public class MemberDAO extends DBConn{
 		}
 		return lst;
 	}
-	//레코드 추가
-	//레코드 수정
-	//레코드 삭제
 	//레코드 검색
 	public List<MemberVO> getSearchRecord(String searchWord) {
 		List<MemberVO> lst = new ArrayList<MemberVO> ();
@@ -65,14 +62,14 @@ public class MemberDAO extends DBConn{
 		}
 		return lst;
 	}
-	
+	//레코드 추가
 	//회원 등록 메소드
 	public int memberInsert(MemberVO vo) {
 		int result = 0;
 		try {
 			getConn();
 			
-			sql = "insert into member(num, username, tel, addr, email, writedate "
+			sql = "insert into member(num, username, tel, addr, email) "
 					+ "values(memSq.nextval, ?, ?, ? ,?)";
 
 			pstmt = conn.prepareStatement(sql);
@@ -80,6 +77,50 @@ public class MemberDAO extends DBConn{
 			pstmt.setString(2, vo.getTel());
 			pstmt.setString(3, vo.getAddr());
 			pstmt.setString(4, vo.getEmail());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return result;
+	}
+	//레코드 수정
+	//다른 방법 ->
+//	public int memberUpdate(int num, String tel, String email, String addr) {	
+	//회원 정보 수정  		   (번호, 연락처, 이메일, 주소)
+	public int memberUpdate(MemberVO vo) {
+		int result = 0;
+		try {
+			getConn();
+			sql = "update member set tel=?, email=?, addr=? where num=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTel());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getAddr());
+			pstmt.setInt(4, vo.getNum());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose();
+		}
+		return result;
+	}
+	//레코드 삭제
+	//회원 삭제
+	public int memberDelete(int num) {
+		int result = 0;
+		try {
+			getConn();
+			sql = "delete from member where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
 			
 			result = pstmt.executeUpdate();
 			
