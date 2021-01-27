@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Calculrator extends JPanel implements ActionListener{
+public class Calculator extends JPanel implements ActionListener{
 	
 	// 폰트
 	Font fnt = new Font ("Arial" , Font.BOLD,20);
@@ -37,7 +37,7 @@ public class Calculrator extends JPanel implements ActionListener{
 		
 		
 		
-	public Calculrator () { // 여기는 프레임
+	public Calculator () { // 여기는 프레임
 		setLayout(new BorderLayout());
 		
 		//JFRAME - North 숫자 입력 칸임

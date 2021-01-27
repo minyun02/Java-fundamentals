@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -23,7 +25,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -64,7 +65,7 @@ public class MemberMain extends JFrame implements ActionListener {
 			formLabelPane.add(formLabel);
 		}
 		mainNorthPane.add("West", formLabelPane);
-
+		
 		// TextField
 		for (int idx = 0; idx < tf.length; idx++) {
 			JPanel p = new JPanel();
@@ -78,7 +79,7 @@ public class MemberMain extends JFrame implements ActionListener {
 		for (int idx = 0; idx < btnLbl.length; idx++) {
 			JButton btn = new JButton(btnLbl[idx]);
 			buttonPane.add(btn);
-
+			btn.setBackground(new Color(51,153,255));
 			// 이벤트 등록
 			btn.addActionListener(this);
 		}
@@ -91,7 +92,7 @@ public class MemberMain extends JFrame implements ActionListener {
 		// 검색
 		add("South", searchPane);
 		searchPane.add(searchTf);
-		searchPane.add(searchBtn);
+		searchPane.add(searchBtn); searchBtn.setBackground(new Color(51,153,255));
 
 		setSize(1000, 600);
 		setVisible(true);
@@ -142,56 +143,52 @@ public class MemberMain extends JFrame implements ActionListener {
 		} else if (eventBtn.equals("엑셀로쓰기")) {
 			setMemberExcelSave();
 		}else if(eventBtn.equals("엑셀에서 가져오기")) {
-			getExcelOpen();
+			getMemberExcelOpen();
 		}
 	}
-	// 엑셀에서 가져오기
-	public void getExcelOpen() {
-		//파일탐색기
+	// 엑셀에서 회원목록 가져오기
+	public void getMemberExcelOpen() {
+	//어떤 파일 가져올지 고르기 위해 파일탐색기 객체 생성
 		JFileChooser fc = new JFileChooser();
-		fc.setMultiSelectionEnabled(true);
-		//파일 필터 설정
-		FileFilter ff1 = new FileNameExtensionFilter("*.xls", "xls", "XLS", "Xls", "엑셀");
-		fc.addChoosableFileFilter(ff1);
+		FileFilter ff = new FileNameExtensionFilter("*.xls", "xls", "XLS");//파일 확장자를 필터링해준다
+		fc.setFileFilter(ff); // 필터를 파일탐색기에 설정
+		
+		//0:열기 1:취소 -> 파일탐색기에서 누른 버튼을 int에 담아준다
 		int state = fc.showOpenDialog(this);
-		if(state==0) {
+		
+		if(state==0) {//열기 버튼을 눌렀을때 불러올 파일 정보를 받아야한다.
 			try {
-				//불러올 파일 위치
-				File f = fc.getSelectedFile();
-				FileInputStream fis = new FileInputStream(f);
-				POIFSFileSystem poi = new POIFSFileSystem(fis); //poit객체 얻어오기
-				HSSFWorkbook workbook = new HSSFWorkbook(poi);//워크북 얻어오기
-				int sheetCount = workbook.getNumberOfSheets();//시트수 구하기
-				System.out.println("시트수 :"+ sheetCount);
-				HSSFSheet sheet = workbook.getSheetAt(0);//데이터 읽을 시트(여러개면 for문..?)
-				int rowCount = sheet.getPhysicalNumberOfRows();//행의 수 구하기
-				for(int row=1; row<rowCount; row++) {
-					HSSFRow memRow = sheet.getRow(row);
-					System.out.println("memRow->"+memRow);
-					
-					int colCount = memRow.getPhysicalNumberOfCells();//칼럼 수 구하기
-					for(int col=0; col<colCount; col++) {
-						HSSFCell cell = memRow.getCell(col);
-						System.out.println("cell->"+cell);
-						records = new String[row][col]; //읽어온 데이터를 담을 2중배열
-						
-//						if(row>0 && col==0) {//num부분 -> 숫자
-//							int data = (int)cell.getNumericCellValue();
-//							System.out.print(data+"\t");
-//							
-//						}else {//문자읽기
-//							String data = cell.getStringCellValue();
-//							System.out.print(data+"\t");
-						}
-					}
-					setFormClear();
-					DefaultTableModel tablemodel = new DefaultTableModel(records, lbl);
-					table = new JTable(tablemodel);
-					sp = new JScrollPane(table);
-					
-//				}
+				//선책해 놓은 파일 정보
+				File selectFileName = fc.getSelectedFile();
+				//파일에서 데이터를 읽어와야하니까 인풋스트림을 만든다
+				FileInputStream fis = new FileInputStream(selectFileName);
 				
-				poi.close();
+				//엑셀에서 파일을 사용할 수 있는 객체를 생성한다.
+				POIFSFileSystem poi = new POIFSFileSystem(fis);
+				
+				//workbook 구하기
+				HSSFWorkbook workbook = new HSSFWorkbook(poi);
+				//sheet 구하기
+				HSSFSheet sheet = workbook.getSheet("회원정보"); //회원정보라는 시트를 읽겠다
+				//row 구하기
+				int rowCount = sheet.getPhysicalNumberOfRows();//위에서 읽어온 시트 속 행의 수를 구한다 -> for문을 위해
+				
+				List<MemberVO> lst = new ArrayList<MemberVO>(); //읽어온 레코드를 list에 담기위해 객체 생성
+				for(int row=1; row<rowCount; row++) {
+					MemberVO vo = new MemberVO();
+					//cell 구하기
+					HSSFRow rowData = sheet.getRow(row);
+					//번호
+					vo.setNum((int)rowData.getCell(0).getNumericCellValue()); //cell에 담긴 numeric 데이터가 double로 담겨온다
+					vo.setUsername(rowData.getCell(1).getStringCellValue()); //setUsername에 1번지 cell속에 담긴 value를 담는다.
+					vo.setTel(rowData.getCell(2).getStringCellValue());
+					vo.setEmail(rowData.getCell(3).getStringCellValue());
+					vo.setAddr(rowData.getCell(4).getStringCellValue());
+					vo.setWritedate(rowData.getCell(5).getStringCellValue());
+					lst.add(vo);
+				}
+				setNewTableList(lst);
+			
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -205,8 +202,8 @@ public class MemberMain extends JFrame implements ActionListener {
 		FileFilter ff = new FileNameExtensionFilter("*.xls", "xls", "XLS", "Xls");
 		fc.setFileFilter(ff);
 		
-		int status = fc.showSaveDialog(this);
-		if(status==0) {//탐색기에서 저장버튼을 선택시
+		int state = fc.showSaveDialog(this);
+		if(state==0) {//탐색기에서 저장버튼을 선택시
 			//선택한 위치와 파일명을 얻어오기
 			File selFile = fc.getSelectedFile();
 			
@@ -341,7 +338,7 @@ public class MemberMain extends JFrame implements ActionListener {
 		setNewTableList(lst);
 	}
 
-	public void setNewTableList(List<MemberVO> lst) {
+	public void setNewTableList(List<MemberVO> lst) { //테이블을 비우고 리스트에 담긴 데이터를 불러오고 테이블에 출력하는 메소드
 		model.setRowCount(0); // JTable의 모든 레코드 지우기
 		for (int i = 0; i < lst.size(); i++) { // lst.size() -> 컬렉션이 몇개 들어있는지 알려주는 length같은거
 			MemberVO vo = lst.get(i);

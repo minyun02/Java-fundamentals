@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 //21-01-12
 public class WindowEventTest extends JFrame implements WindowListener{
 	JLabel lbl = new JLabel ("계산기");
-	Calculrator cal = new Calculrator();
+	Calculator cal = new Calculator();
 	
 	public WindowEventTest() {
 		add("North" , lbl);
