@@ -84,14 +84,14 @@ public class ChatLayout extends JFrame{
 				for(String userIp : user) {
 					model.addElement(userIp);
 				}
-				list.setModel(model);;
+				list.setModel(model);
 				//JScrollPane scr1 = JScrollPane(list);
 		listPane.add("Center", list);		
 		
 		JLabel userLbl = new JLabel("현재원"+ "?"+ "명");
 		listPane.add("South", userLbl);
 		
-		pane2.add(listPane, "East");
+		pane2.add("East", listPane);
 	}
 	public static void main(String[] args) {
 		new ChatLayout();
