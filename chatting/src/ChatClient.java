@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class ChatClient extends JFrame implements ActionListener, Runnable{
 	//JFrame-center
@@ -31,7 +33,7 @@ public class ChatClient extends JFrame implements ActionListener, Runnable{
 		JScrollPane msgSp = new JScrollPane(msgTa);								//메시지가 길어지면 스크롤바 필요
 		JPanel sendPane = new JPanel(new BorderLayout());					//남쪽에 들어갈 메시지 입력 텍스트필드랑 버튼
 			JTextField sendTf = new JTextField();											//메시지입력 텍스트필드
-			JButton sendBtn = new JButton("보내기");									//보내기 버
+			JButton sendBtn = new JButton("보내기");									//보내기 버튼
 	//JFrame-East
 	JPanel eastPane = new JPanel(new BorderLayout());						//접속자리스트가 들어갈 동쪽패널
 		JLabel listTitle = new JLabel("             접속자리스트            ");			
@@ -41,8 +43,8 @@ public class ChatClient extends JFrame implements ActionListener, Runnable{
 		JLabel connCountLbl = new JLabel("현재원 : 0명");	
 		
 	////////////////////////////////////////////
-	Socket s;																									//Socket 변수 선
-	PrintWriter pw;																						//문자 출력을 위한 PrintWriter 변수 선
+	Socket s;																									//Socket 변수 선언
+	PrintWriter pw;																						//문자 출력을 위한 PrintWriter 변수 선언
 	BufferedReader br;																						//문자를 줄 단위로 읽어오기 위한 BufferedReader.
 	public ChatClient() {
 		//JFrame-center		
@@ -55,7 +57,14 @@ public class ChatClient extends JFrame implements ActionListener, Runnable{
 		centerPane.add("South", sendPane);
 			sendPane.add(sendTf);
 			sendPane.add("East", sendBtn);
-
+			
+		///Border///////////////////////////
+		LineBorder lineBorder = new LineBorder(Color.green);
+		TitledBorder tBorder = new TitledBorder(lineBorder, "Message",
+				TitledBorder.CENTER, TitledBorder.ABOVE_TOP);
+		//					 좌우						위아래.
+		centerPane.setBorder(tBorder);
+		////////////////////////////////////	
 		//JFrame-East
 		add("East", eastPane);
 			eastPane.add("North", listTitle);
