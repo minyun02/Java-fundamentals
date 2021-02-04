@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class BookingChange2	extends JPanel {
+public class BookingChange2_OLD	extends JFrame {
 	//빈공간을 위한 전체 패널
 	JPanel masterPane = new JPanel(new BorderLayout());
 		JLabel gapN = new JLabel(" ");
@@ -61,14 +61,14 @@ public class BookingChange2	extends JPanel {
 				JTable table;
 				JScrollPane sp;
 				DefaultTableModel model; 
-	public BookingChange2() {
+	public BookingChange2_OLD() {
 		add(masterPane);
 		masterPane.add("North", gapN);
-			gapN.setPreferredSize(new Dimension(100,50));
+			gapN.setPreferredSize(new Dimension(100,100));
 		masterPane.add("West", gapW);
-			gapW.setPreferredSize(new Dimension(10,100));
+			gapW.setPreferredSize(new Dimension(200,100));
 		masterPane.add("East", gapE);
-			gapE.setPreferredSize(new Dimension(10,100));
+			gapE.setPreferredSize(new Dimension(200,100));
 		masterPane.add("South", gapS);
 			gapS.setPreferredSize(new Dimension(100,100));
 		masterPane.add("Center", pane);
@@ -83,7 +83,6 @@ public class BookingChange2	extends JPanel {
 		topNorthPane.add("Center", centerPane);
 			centerPane.setLayout(null);
 			//centerPane.setBackground(Color.blue);
-			centerPane.setPreferredSize(new Dimension(185,150));
 			setCenterPane();
 			
 		topNorthPane.add("East", eastPane);
@@ -108,7 +107,7 @@ public class BookingChange2	extends JPanel {
 		
 		setSize(1000, 800);
 		setVisible(true);
-		//setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}	
 	public void setWestPane() {
 		JLabel bookingLbl = new JLabel("예약번호");
@@ -158,21 +157,21 @@ public class BookingChange2	extends JPanel {
 		JLabel flightLbl = new JLabel("도착시간");
 		JTextField tf3 = new JTextField(10);
 		eastPane.add(bookingLbl);
-			bookingLbl.setBounds(20,0, 50,20);
+			bookingLbl.setBounds(0,0, 50,20);
 		eastPane.add(tf1);
-			tf1.setBounds(80,1, 100,20);
+			tf1.setBounds(60,1, 100,20);
 		eastPane.add(dateLbl);
-			dateLbl.setBounds(20,50, 50,20);
+			dateLbl.setBounds(0,50, 50,20);
 		eastPane.add(tf2);
-			tf2.setBounds(80,51, 100,20);
+			tf2.setBounds(60,51, 100,20);
 		eastPane.add(flightLbl);
-			flightLbl.setBounds(20,100, 50,20);
+			flightLbl.setBounds(0,100, 50,20);
 		eastPane.add(tf3);
-			tf3.setBounds(80,101, 100,20);
+			tf3.setBounds(60,101, 100,20);
 	}
-//	public static void main(String[] args) {
-//		new BookingChange2();
-//
-//	}
+	public static void main(String[] args) {
+		new BookingChange2_OLD();
+
+	}
 
 }
