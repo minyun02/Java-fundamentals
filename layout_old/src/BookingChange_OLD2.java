@@ -3,6 +3,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +14,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class BookingChange2	extends JPanel {
+public class BookingChange_OLD2	extends JFrame {
+	Font fnt = new Font("굴림체", Font.BOLD, 14);
+	Font titleFnt = new Font("굴림체", Font.BOLD, 32);
+	
+	
 	//빈공간을 위한 전체 패널
 	JPanel masterPane = new JPanel(new BorderLayout());
 		JLabel gapN = new JLabel(" ");
@@ -61,17 +66,27 @@ public class BookingChange2	extends JPanel {
 				JTable table;
 				JScrollPane sp;
 				DefaultTableModel model; 
-	public BookingChange2() {
+	public BookingChange_OLD2() {
 		add(masterPane);
 		masterPane.add("North", gapN);
-			gapN.setPreferredSize(new Dimension(100,50));
+			gapN.setPreferredSize(new Dimension(100,100));
 		masterPane.add("West", gapW);
-			gapW.setPreferredSize(new Dimension(10,100));
+			gapW.setPreferredSize(new Dimension(200,100));
 		masterPane.add("East", gapE);
-			gapE.setPreferredSize(new Dimension(10,100));
+			gapE.setPreferredSize(new Dimension(200,100));
 		masterPane.add("South", gapS);
 			gapS.setPreferredSize(new Dimension(100,100));
 		masterPane.add("Center", pane);
+		
+//		masterPane.add("North", gapN);
+//			gapN.setPreferredSize(new Dimension(100,50));
+//		masterPane.add("West", gapW);
+//			gapW.setPreferredSize(new Dimension(10,100));
+//		masterPane.add("East", gapE);
+//			gapE.setPreferredSize(new Dimension(10,100));
+//		masterPane.add("South", gapS);
+//			gapS.setPreferredSize(new Dimension(100,100));
+//		masterPane.add("Center", pane);
 		
 		pane.add("North", topNorthPane);
 		topNorthPane.add("West", westPane);
@@ -83,7 +98,6 @@ public class BookingChange2	extends JPanel {
 		topNorthPane.add("Center", centerPane);
 			centerPane.setLayout(null);
 			//centerPane.setBackground(Color.blue);
-			centerPane.setPreferredSize(new Dimension(185,150));
 			setCenterPane();
 			
 		topNorthPane.add("East", eastPane);
@@ -94,8 +108,10 @@ public class BookingChange2	extends JPanel {
 			
 		topNorthPane.add("South", southPane);
 			southPane.add(changeBtn);
+				changeBtn.setFont(fnt);
 			southPane.add(new JLabel("        "));
 			southPane.add(cancelBtn);
+				cancelBtn.setFont(fnt);
 			
 		/////////////////////////////////////////테이블 세팅
 		pane.add("Center", gapPane);
@@ -108,7 +124,7 @@ public class BookingChange2	extends JPanel {
 		
 		setSize(1000, 800);
 		setVisible(true);
-		//setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}	
 	public void setWestPane() {
 		JLabel bookingLbl = new JLabel("예약번호");
@@ -119,60 +135,96 @@ public class BookingChange2	extends JPanel {
 		JTextField tf3 = new JTextField(10);
 		westPane.add(bookingLbl);
 			bookingLbl.setBounds(0,0, 50,20);
+			bookingLbl.setFont(fnt);
 		westPane.add(tf1);
 			tf1.setBounds(60,1, 100,20);
+			tf1.setFont(fnt);
 		westPane.add(dateLbl);
 			dateLbl.setBounds(0,50, 50,20);
+			dateLbl.setFont(fnt);
 		westPane.add(tf2);
 			tf2.setBounds(60,51, 100,20);
+			tf2.setFont(fnt);
 		westPane.add(flightLbl);
 			flightLbl.setBounds(0,100, 50,20);
+			flightLbl.setFont(fnt);
 		westPane.add(tf3);
 			tf3.setBounds(60,101, 100,20);
+			tf3.setFont(fnt);
+//		JLabel bookingLbl = new JLabel("예약번호");
+//		JTextField tf1 = new JTextField(10);
+//		JLabel dateLbl = new JLabel("출발일시");
+//		JTextField tf2 = new JTextField(10);
+//		JLabel flightLbl = new JLabel("항공편명");
+//		JTextField tf3 = new JTextField(10);
+//		westPane.add(bookingLbl);
+//			bookingLbl.setBounds(0,0, 50,20);
+//		westPane.add(tf1);
+//			tf1.setBounds(60,1, 100,20);
+//		westPane.add(dateLbl);
+//			dateLbl.setBounds(0,50, 50,20);
+//		westPane.add(tf2);
+//			tf2.setBounds(60,51, 100,20);
+//		westPane.add(flightLbl);
+//			flightLbl.setBounds(0,100, 50,20);
+//		westPane.add(tf3);
+//			tf3.setBounds(60,101, 100,20);
 	}
 	public void setCenterPane() {
-		JLabel bookingLbl = new JLabel("출발도시");
-		JTextField tf1 = new JTextField(10);
-		JLabel dateLbl = new JLabel("출발공항");
-		JTextField tf2 = new JTextField(10);
-		JLabel flightLbl = new JLabel("출발시간");
-		JTextField tf3 = new JTextField(10);
-		centerPane.add(bookingLbl);
-			bookingLbl.setBounds(10,0, 50,20);
-		centerPane.add(tf1);
-			tf1.setBounds(70,1, 100,20);
-		centerPane.add(dateLbl);
-			dateLbl.setBounds(10,50, 50,20);
-		centerPane.add(tf2);
-			tf2.setBounds(70,51, 100,20);
-		centerPane.add(flightLbl);
-			flightLbl.setBounds(10,100, 50,20);
-		centerPane.add(tf3);
-			tf3.setBounds(70,101, 100,20);
+		JLabel depLbl = new JLabel("출발도시");
+		JTextField tf4 = new JTextField(10);
+		JLabel depALbl = new JLabel("출발공항");
+		JTextField tf5 = new JTextField(10);
+		JLabel depTimeLbl = new JLabel("출발시간");
+		JTextField tf6 = new JTextField(10);
+		centerPane.add(depLbl);
+			depLbl.setBounds(40,0, 50,20);
+			depLbl.setFont(fnt);
+		centerPane.add(tf4);
+			tf4.setBounds(100,1, 100,20);
+			tf4.setFont(fnt);
+		centerPane.add(depALbl);
+			depALbl.setBounds(40,50, 50,20);
+			depALbl.setFont(fnt);
+		centerPane.add(tf5);
+			tf5.setBounds(100,51, 100,20);
+			tf5.setFont(fnt);
+		centerPane.add(depTimeLbl);
+			depTimeLbl.setBounds(40,100, 50,20);
+			depTimeLbl.setFont(fnt);
+		centerPane.add(tf6);
+			tf6.setBounds(100,101, 100,20);
+			tf6.setFont(fnt);
 	}
 	public void setEastPane() {
-		JLabel bookingLbl = new JLabel("도착도시");
-		JTextField tf1 = new JTextField(10);
-		JLabel dateLbl = new JLabel("도착공항");
-		JTextField tf2 = new JTextField(10);
-		JLabel flightLbl = new JLabel("도착시간");
-		JTextField tf3 = new JTextField(10);
-		eastPane.add(bookingLbl);
-			bookingLbl.setBounds(20,0, 50,20);
-		eastPane.add(tf1);
-			tf1.setBounds(80,1, 100,20);
-		eastPane.add(dateLbl);
-			dateLbl.setBounds(20,50, 50,20);
-		eastPane.add(tf2);
-			tf2.setBounds(80,51, 100,20);
-		eastPane.add(flightLbl);
-			flightLbl.setBounds(20,100, 50,20);
-		eastPane.add(tf3);
-			tf3.setBounds(80,101, 100,20);
+		JLabel desLbl = new JLabel("도착도시");
+		JTextField tf7 = new JTextField(10);
+		JLabel desALbl = new JLabel("도착공항");
+		JTextField tf8 = new JTextField(10);
+		JLabel arrTimeLbl = new JLabel("도착시간");
+		JTextField tf9 = new JTextField(10);
+		eastPane.add(desLbl);
+			desLbl.setBounds(25,0, 50,20);
+			desLbl.setFont(fnt);
+		eastPane.add(tf7);
+			tf7.setBounds(85,1, 100,20);
+			tf7.setFont(fnt);
+		eastPane.add(desALbl);
+			desALbl.setBounds(25,50, 50,20);
+			desALbl.setFont(fnt);
+		eastPane.add(tf8);
+			tf8.setBounds(85,51, 100,20);
+			tf8.setFont(fnt);
+		eastPane.add(arrTimeLbl);
+			arrTimeLbl.setBounds(25,100, 50,20);
+			arrTimeLbl.setFont(fnt);
+		eastPane.add(tf9);
+			tf9.setBounds(85,101, 100,20);
+			tf9.setFont(fnt);
 	}
-//	public static void main(String[] args) {
-//		new BookingChange2();
-//
-//	}
+	public static void main(String[] args) {
+		new BookingChange_OLD2();
+
+	}
 
 }

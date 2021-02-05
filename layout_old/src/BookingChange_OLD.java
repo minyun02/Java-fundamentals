@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class BookingChange extends JFrame{
+public class BookingChange_OLD extends JFrame{
 	//빈공간 채울 라벨
 	JLabel lbl1 = new JLabel();
 		
@@ -35,7 +35,7 @@ public class BookingChange extends JFrame{
 		JPanel pane10 = new JPanel();	//3패널 남쪽에 예약변경, 예약취소 버튼 넣을 패널
 			JButton btn1 = new JButton("예약변경");
 			JButton btn2 = new JButton("예약취소");
-	public BookingChange() {
+	public BookingChange_OLD() {
 		add(pane1);
 		pane1.add("Center", sp);
 		pane1.add("North", lbl1);
@@ -104,7 +104,7 @@ public class BookingChange extends JFrame{
 				
 	}
 	public static void main(String[] args) {
-		new BookingChange();
+		new BookingChange_OLD();
 
 	}
 
