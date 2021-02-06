@@ -50,8 +50,12 @@ public class EmpFlightChange extends JFrame{
 	JButton btn2 = new JButton("설정완료");
 	public EmpFlightChange() {
 		setLayout(null);
+		this.getContentPane().setBackground(Color.white);
 		
 		add(calBtn).setBounds(200,100, 35,35);
+			calBtn.setBorderPainted(false);
+			calBtn.setContentAreaFilled(false);
+			calBtn.setFocusPainted(false);
 		add(bcpLbl).setBounds(250, 100, 50, 35);
 			bcpLbl.setFont(fnt);
 		add(tf1).setBounds(285, 105, 100, 25);
@@ -64,14 +68,17 @@ public class EmpFlightChange extends JFrame{
 			desLbl.setFont(fnt);
 		add(tf3).setBounds(605, 105, 100, 25);
 			tf3.setFont(fnt);
-		add(searchBtn).setBounds(720, 101, 80, 33);
+		add(searchBtn).setBounds(720, 101, 70, 30);
 			searchBtn.setFont(fnt);
+			searchBtn.setBackground(new Color(0,130,255));
+			searchBtn.setForeground(Color.white);
 		
 		//table
 		model = new DefaultTableModel(info,0);
 		table = new JTable(model);
 		sp  = new JScrollPane(table);
 		add(sp).setBounds(200, 165, 600, 300);
+			sp.getViewport().setBackground(Color.white);
 		
 		//기내식
 		add(foodLbl).setBounds(350, 480, 60,35);
@@ -79,31 +86,37 @@ public class EmpFlightChange extends JFrame{
 		cb1 = new JComboBox<String> (food);
 		add(cb1).setBounds(450, 481, 180, 35);
 			cb1.setFont(fnt);
+			cb1.setBackground(Color.white);
 			//cb1.setAlignmentX(CENTER_ALIGNMENT);
 		
 		//지연 상태
 		add(delayLbl).setBounds(350, 515, 50, 35);
 			delayLbl.setFont(fnt);
-		add(delayCheckBox).setBounds(450, 515, 70, 35);
-		add(depTimeLbl).setBounds(490,515, 60, 35);
+		add(delayCheckBox).setBounds(450, 524, 17, 17);
+			delayCheckBox.setBackground(Color.white);
+		add(depTimeLbl).setBounds(480,515, 60, 35);
 			depTimeLbl.setFont(fnt);
 		add(depTf).setBounds(545, 521, 80, 25);
 			depTf.setFont(fnt);
-		add(arrTimeLbl).setBounds(630, 515, 70, 35);
+		add(arrTimeLbl).setBounds(630, 516, 80, 35);
 			arrTimeLbl.setFont(fnt);
-		add(arrTf).setBounds(700, 521, 80, 25);
+		add(arrTf).setBounds(710, 521, 80, 25);
 			arrTf.setFont(fnt);
 			
 		//결항 상태
 		add(cancelLbl).setBounds(350, 550, 50, 35);
 			cancelLbl.setFont(fnt);
-		add(cancel).setBounds(450, 550, 70, 35);
+		add(cancel).setBounds(450, 559, 17, 17);
+			cancel.setBackground(Color.white);
 		cancelState = new JComboBox<String>(state);
-		add(cancelState).setBounds(480,551, 150, 35);
+		add(cancelState).setBounds(480,552, 150, 30);
 			cancelState.setFont(fnt);
+			cancelState.setBackground(Color.white);
 			
-		add(btn2).setBounds(480, 600, 80,33);
+		add(btn2).setBounds(480, 600, 100,30);
 			btn2.setFont(fnt);
+			btn2.setBackground(new Color(0,130,255));
+			btn2.setForeground(Color.white);
 		
 		setSize(1000, 800);
 		setVisible(true);

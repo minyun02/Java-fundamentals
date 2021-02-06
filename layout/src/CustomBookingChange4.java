@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -7,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class BookingChange4 extends JFrame{
+public class CustomBookingChange4 extends JFrame{
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	Font titleFnt = new Font("굴림체", Font.BOLD, 32);
 	
@@ -32,39 +33,46 @@ public class BookingChange4 extends JFrame{
 	JButton saveBtn = new JButton("저장");
 	JButton okBtn = new JButton("확인");
 	
-	public BookingChange4() {
+	public CustomBookingChange4() {
 		setLayout(null);
+		this.getContentPane().setBackground(Color.white);
 		
-		add(ticketLbl).setBounds(430, 60, 170, 50);
+		add(ticketLbl).setBounds(420, 60, 200, 50);
 			ticketLbl.setFont(titleFnt);
-		add(bookingNumLbl1).setBounds(380, 120, 50, 35);
+		add(bookingNumLbl1).setBounds(380, 120, 70, 35);
 			bookingNumLbl1.setFont(fnt);
-		add(bookingNumLbl2).setBounds(375, 150, 100, 35);
+		add(bookingNumLbl2).setBounds(385, 150, 100, 35);
 			bookingNumLbl2.setFont(fnt);
 			
-		add(bookingDateLbl1).setBounds(585, 120, 50, 35);
+		add(bookingDateLbl1).setBounds(580, 120, 70, 35);
 			bookingDateLbl1.setFont(fnt);
-		add(bookingDateLbl2).setBounds(565, 150, 100, 35);
+		add(bookingDateLbl2).setBounds(575, 150, 100, 35);
 			bookingDateLbl2.setFont(fnt);
 			
-		add(flightLbl).setBounds(430, 200, 170, 50);
+		add(flightLbl).setBounds(420, 200, 200, 50);
 			flightLbl.setFont(titleFnt);
 		model1 = new DefaultTableModel(flightStr,0);
 		flightTable = new JTable(model1);
 		sp1 = new JScrollPane(flightTable);
 		add(sp1).setBounds(200, 250, 600, 150);
+			sp1.getViewport().setBackground(Color.white);
 		
-		add(passengerLbl).setBounds(430, 400, 170, 50);
+		add(passengerLbl).setBounds(420, 400, 200, 50);
 			passengerLbl.setFont(titleFnt);
 		model2 = new DefaultTableModel(passengerStr, 0);
 		passengerTable = new JTable(model2);
 		sp2 = new JScrollPane(passengerTable);
 		add(sp2).setBounds(200, 450, 600, 150);
-		
-		add(saveBtn).setBounds(390, 610, 70, 35);
+			sp2.getViewport().setBackground(Color.white);
+			
+		add(saveBtn).setBounds(350, 620, 100, 30);
 			saveBtn.setFont(fnt);
-		add(okBtn).setBounds(550, 610, 70, 35);
+			saveBtn.setBackground(new Color(0,130,255));
+			saveBtn.setForeground(Color.white);
+		add(okBtn).setBounds(550, 620, 100, 30);
 			okBtn.setFont(fnt);
+			okBtn.setBackground(new Color(0,130,255));
+			okBtn.setForeground(Color.white);
 		
 			
 		setSize(1000,800);
@@ -73,7 +81,7 @@ public class BookingChange4 extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		new BookingChange4();
+		new CustomBookingChange4();
 
 	}
 

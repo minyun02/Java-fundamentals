@@ -43,11 +43,15 @@ public class EmpFlightAdd  extends JFrame{
 	
 	public EmpFlightAdd() {
 		setLayout(null);
+		this.getContentPane().setBackground(Color.white);
 		int x = 300;
-		int x1 = 410;
+		int x1 = 420;
 		
 		add(calBtn).setBounds(300, 90, 50, 50);
-		add(titleLbl).setBounds(420,100, 200, 30);
+			calBtn.setBorderPainted(false);
+			calBtn.setContentAreaFilled(false);
+			calBtn.setFocusPainted(false);
+		add(titleLbl).setBounds(420,100, 250, 30);
 			titleLbl.setFont(titleFnt);
 		add(flightNameLbl).setBounds(x, 200, 100,30); add(flightnameTf).setBounds(x1, 200, 250, 30);
 			flightNameLbl.setFont(fnt);
@@ -77,22 +81,22 @@ public class EmpFlightAdd  extends JFrame{
 			empLbl.setFont(fnt);
 			emp1.setFont(fnt);
 		emp2 = new JComboBox<String>(pilot2); emp2.setBackground(Color.white);
-		add(emp2).setBounds(520, 550, 100,30);
+		add(emp2).setBounds(530, 550, 100,30);
 			emp2.setFont(fnt);
 		emp3 = new JComboBox<String>(crew); emp3.setBackground(Color.white);
-		add(emp3).setBounds(630, 550, 100,30);
-				emp3.setFont(fnt);	
+		add(emp3).setBounds(640, 550, 100,30);
+				emp3.setFont(fnt);
 
 		
-		add(saveBtn).setBounds(370,620,100,35); add(cancelBtn).setBounds(520,620,100,35);	
+		add(saveBtn).setBounds(370,620,100,30); add(cancelBtn).setBounds(520,620,100,30);	
 		saveBtn.setFont(fnt);
-//		saveBtn.setBackground(new Color(0,130,255));
-//		saveBtn.setForeground(Color.white);
+		saveBtn.setBackground(new Color(0,130,255));
+		saveBtn.setForeground(Color.white);
 		cancelBtn.setFont(fnt);
-//		cancelBtn.setBackground(new Color(0,130,255));
-//		cancelBtn.setForeground(Color.white);		
+		cancelBtn.setBackground(new Color(0,130,255));
+		cancelBtn.setForeground(Color.white);		
 		
-		setBackground(Color.white);
+
 		setSize(1000, 800);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

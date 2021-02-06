@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -41,36 +42,39 @@ public class EmpPayment extends JFrame{
 	
 	public EmpPayment() {
 		setLayout(null);
+		this.getContentPane().setBackground(Color.white);
 		
-		add(amountLbl1).setBounds(70,70, 80,25); amountLbl1.setFont(fnt);
+		add(amountLbl1).setBounds(60,70, 80,25); amountLbl1.setFont(fnt);
 		add(amountLbl2).setBounds(200,70, 100,25);amountLbl2.setFont(fnt);
 		add(wonLbl).setBounds(270,70, 20,25); wonLbl.setFont(fnt);
 		
-		add(amountLbl3).setBounds(70,100, 80, 25); amountLbl3.setFont(fnt); 
+		add(amountLbl3).setBounds(60,100, 80, 25); amountLbl3.setFont(fnt); 
 		add(amountLbl4).setBounds(200, 100, 100, 25);amountLbl4.setFont(fnt); 
 		add(wonLbl2).setBounds(270,100, 20,25);	wonLbl2.setFont(fnt);
 			
-		add(paymentLbl).setBounds(70, 130, 80, 25); paymentLbl.setFont(fnt);
-		paymentBox = new JComboBox<String>(paymentStr);
+		add(paymentLbl).setBounds(60, 130, 80, 25); paymentLbl.setFont(fnt);
+			paymentBox = new JComboBox<String>(paymentStr);
+			paymentBox.setBackground(Color.white);
 		add(paymentBox).setBounds(200, 130, 100, 25); paymentBox.setFont(fnt);
 			
-		add(cardNumLbl).setBounds(70, 160, 80, 25); cardNumLbl.setFont(fnt);
+		add(cardNumLbl).setBounds(60, 160, 80, 25); cardNumLbl.setFont(fnt);
 		add(cardNumTf).setBounds(200,160, 160, 25);	cardNumTf.setFont(fnt);
 			
-		add(mileageLbl1).setBounds(70,190, 80,25); mileageLbl1.setFont(fnt);
+		add(mileageLbl1).setBounds(60,190, 80,25); mileageLbl1.setFont(fnt);
 		add(mileageLbl2).setBounds(200,190, 60,25); mileageLbl2.setFont(fnt);
 		add(mileageLbl3).setBounds(270,190, 60, 25); mileageLbl3.setFont(fnt);
 		
-		add(mileageLbl4).setBounds(70,220, 80,25); mileageLbl4.setFont(fnt);
-		add(mileageLbl5).setBounds(200,220, 60,25); mileageLbl5.setFont(fnt);
-		add(mileageBtn).setBounds(270,220, 80,25); mileageBtn.setFont(fnt);
+				
+		add(finalPayLbl1).setBounds(60,220, 100,25); finalPayLbl1.setFont(fnt);
+		add(finalPayLbl2).setBounds(200,220, 100,25); finalPayLbl2.setFont(fnt);
+		add(wonLbl3).setBounds(270,220, 20,25); wonLbl3.setFont(fnt);
 		
-		add(finalPayLbl1).setBounds(70,250, 80,25); finalPayLbl1.setFont(fnt);
-		add(finalPayLbl2).setBounds(200,250, 100,25); finalPayLbl2.setFont(fnt);
-		add(wonLbl3).setBounds(270,250, 20,25); wonLbl3.setFont(fnt);
-		
-		add(payBtn).setBounds(100,300, 80, 30); payBtn.setFont(fnt);	
-		add(cancelBtn).setBounds(220,300, 80,30); cancelBtn.setFont(fnt);
+		add(payBtn).setBounds(75,320, 100, 30); payBtn.setFont(fnt);
+			payBtn.setBackground(new Color(0,130,255));
+			payBtn.setForeground(Color.white);
+		add(cancelBtn).setBounds(220,320, 100,30); cancelBtn.setFont(fnt);
+			cancelBtn.setBackground(new Color(0,130,255));
+			cancelBtn.setForeground(Color.white);
 			
 		setSize(400, 450);
 		setVisible(true);

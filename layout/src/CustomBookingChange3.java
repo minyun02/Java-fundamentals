@@ -1,15 +1,21 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class CustomReservation7 extends JFrame{
+public class CustomBookingChange3 extends JFrame implements MouseListener, ItemListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	Font titleFnt = new Font("굴림체", Font.BOLD, 32);
 	
@@ -19,7 +25,7 @@ public class CustomReservation7 extends JFrame{
 	JScrollPane sp1;
 	DefaultTableModel model1;
 	JCheckBox check1 = new JCheckBox("", false);
-	JLabel lbl1 = new JLabel("상기 내용을 확인하고 예약을 진행합니다.");
+	JLabel lbl1 = new JLabel("상기 내용을 확인하고 변경을 진행합니다.");
 	
 	JLabel titleLbl2 = new JLabel("탑승자 정보");
 	String passengerStr[] = {"성명(한)", "성명(영)", "여권번호", "여권만료일", "발행국가", "생년월일", "연락처", "이메일"};
@@ -30,19 +36,19 @@ public class CustomReservation7 extends JFrame{
 	JLabel lbl2 = new JLabel("해당 정보를 확인하세요. 위 내용은 예약 완료 후 변경이 불가합니다.");
 	
 	JLabel titleLbl3 = new JLabel("결제 내역");
-	String paymentStr[] = {"구분", "결제예정금액"};
+	String paymentStr[] = {"구분",  "변경 전", "변경 후", "결제예정금액"};
 	JTable table3;
 	JScrollPane sp3;
 	DefaultTableModel model3;
 	JCheckBox check3 = new JCheckBox("", false);
-	JLabel lbl3 = new JLabel("상기 내용을 확인하고 결제를 진행합니다.");
-	
-	JCheckBox check4 = new JCheckBox("", false);
-	JLabel bookingConfirmLbl = new JLabel("예약 변경 및 취소 규정을 확인해주세요.");
+	JLabel lbl3 = new JLabel("변경된 금액을 확인하고 결제를 진행합니다.");
 	
 	JButton payBtn = new JButton("결제하기");
 	JButton cancelBtn = new JButton("예약취소");
-	public CustomReservation7() {
+	
+	//이벤트용 변수
+	int allSelected = 0;
+	public CustomBookingChange3() {
 		setLayout(null);
 		this.getContentPane().setBackground(Color.white);
 		
@@ -54,7 +60,7 @@ public class CustomReservation7 extends JFrame{
 		sp1 = new JScrollPane(table1);
 			sp1.getViewport().setBackground(Color.white);
 		add(sp1).setBounds(100,110, 800,100);
-		add(check1).setBounds(100, 200, 17, 50);
+		add(check1).setBounds(100, 217, 17, 17);
 			check1.setBackground(Color.white);
 		add(lbl1).setBounds(120, 215, 400, 25);
 			lbl1.setFont(fnt);
@@ -67,8 +73,9 @@ public class CustomReservation7 extends JFrame{
 		sp2 = new JScrollPane(table2);
 		add(sp2).setBounds(100,280, 800, 100);
 			sp2.getViewport().setBackground(Color.white);
-		add(check2).setBounds(100, 370, 17,50);
+		add(check2).setBounds(100, 387, 17,17);
 			check2.setBackground(Color.white);
+			check2.setEnabled(false);
 		add(lbl2).setBounds(120, 385, 470, 25);
 			lbl2.setFont(fnt);
 		
@@ -80,23 +87,18 @@ public class CustomReservation7 extends JFrame{
 		sp3 = new JScrollPane(table3);
 		add(sp3).setBounds(300,460, 400, 100);
 			sp3.getViewport().setBackground(Color.white);
-		add(check3).setBounds(300, 566, 17, 17); //283
+		add(check3).setBounds(300, 567, 17, 17); //283
 			check3.setBackground(Color.white);
+			check3.setEnabled(false);
 		add(lbl3).setBounds(320, 565, 400, 25); //310
 			lbl3.setFont(fnt);
 			
-		add(check4).setBounds(300,580, 17, 45);
-			check4.setEnabled(false); //예약 변경/취소 규정을 눌러서 확인해야 활성화
-			check4.setBackground(Color.white);
-		add(bookingConfirmLbl).setBounds(320,590, 420,27);
-			bookingConfirmLbl.setFont(fnt);	
-			
 		//buttons
-		add(payBtn).setBounds(370, 630, 100, 30);
+		add(payBtn).setBounds(370, 610, 100, 30);
 			payBtn.setFont(fnt);
 			payBtn.setBackground(new Color(0,130,255));
 			payBtn.setForeground(Color.white);
-		add(cancelBtn).setBounds(530, 630, 100, 30);
+		add(cancelBtn).setBounds(530, 610, 100, 30);
 			cancelBtn.setFont(fnt);
 			cancelBtn.setBackground(new Color(0,130,255));
 			cancelBtn.setForeground(Color.white);
@@ -104,11 +106,84 @@ public class CustomReservation7 extends JFrame{
 		setSize(1000, 800);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		//이벤트
+		check1.addItemListener(this);
+		check2.addItemListener(this);
+		check3.addItemListener(this);
+		
+		payBtn.addMouseListener(this);
+		cancelBtn.addMouseListener(this);
 	}
 
 	public static void main(String[] args) {
-		new CustomReservation7();
+		new CustomBookingChange3();
 
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent ie) {
+		if(ie.getStateChange()==ItemEvent.SELECTED) {
+			if(ie.getItem()==check1) {
+				check2.setEnabled(true);
+			}else if(ie.getItem()==check2) {
+				check3.setEnabled(true);
+			}else {
+				allSelected = 1;
+				System.out.println(allSelected);
+			}
+		}else if(ie.getStateChange()==ItemEvent.DESELECTED) {
+			if(ie.getItem()==check1) {
+				allSelected = 0;
+			}else {
+				allSelected = 0;
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		Object obj = me.getSource();
+		if(obj instanceof JButton) {
+			String btnStr = ((JButton) obj).getText();
+			if(btnStr.equals("결제하기")) {
+				if(allSelected==0) {
+					JOptionPane.showMessageDialog(this, "모든 내용을 확인해주세요");
+				}else {
+					this.setVisible(false);
+					JDialog dialog = new JDialog(this, "결제창", true);
+					CustomPayment cp = new CustomPayment();
+					dialog.add(cp);
+					dialog.setSize(400, 450);
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
