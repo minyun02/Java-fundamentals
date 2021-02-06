@@ -113,6 +113,7 @@ public class CustomBookingChange3 extends JFrame implements MouseListener, ItemL
 		check3.addItemListener(this);
 		
 		payBtn.addMouseListener(this);
+			payBtn.setEnabled(false);
 		cancelBtn.addMouseListener(this);
 	}
 
@@ -130,12 +131,15 @@ public class CustomBookingChange3 extends JFrame implements MouseListener, ItemL
 				check3.setEnabled(true);
 			}else {
 				allSelected = 1;
+				payBtn.setEnabled(true);
 				System.out.println(allSelected);
 			}
 		}else if(ie.getStateChange()==ItemEvent.DESELECTED) {
 			if(ie.getItem()==check1) {
 				allSelected = 0;
-			}else {
+			}else if(ie.getItem()==check2){
+				allSelected = 0;
+			}else if(ie.getItem()==check3) {
 				allSelected = 0;
 			}
 		}
@@ -150,13 +154,18 @@ public class CustomBookingChange3 extends JFrame implements MouseListener, ItemL
 			if(btnStr.equals("결제하기")) {
 				if(allSelected==0) {
 					JOptionPane.showMessageDialog(this, "모든 내용을 확인해주세요");
-				}else {
-					this.setVisible(false);
+				}else if(allSelected != 0) {
 					JDialog dialog = new JDialog(this, "결제창", true);
 					CustomPayment cp = new CustomPayment();
 					dialog.add(cp);
 					dialog.setSize(400, 450);
+					dialog.setVisible(true);
 				}
+			}else if(btnStr.equals("예약취소")) {
+				JOptionPane.showMessageDialog(this, "여기서 예약을 취소하면 어디로 가야하지?");
+				//this.setVisible(false);
+				//CustomFrame.bookingChange1.setVisible(true);
+				//CustomFrame.centerPane.add(CustomFrame.bookingChange1);
 			}
 		}
 		

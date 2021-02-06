@@ -142,7 +142,7 @@ public class CustomBookingCancel extends JFrame implements MouseListener, ItemLi
 				if(allSelected == 0) {
 					JOptionPane.showMessageDialog(this, "모든 내용을 확인해주세요.");
 				}else if(allSelected == 1) {
-					JOptionPane.showMessageDialog(this, "144줄로 가서 이벤트 끝내라");
+					JOptionPane.showMessageDialog(this, "취소되면 ");
 					//this.setVisible(false);
 					//CustomFrame.bookingChange1.setVisible(true);
 					//CustomFrame.centerPane.add(CustomFrame.bookingChange1);
