@@ -1,15 +1,18 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class CustomReservation7 extends JFrame{
+public class CustomReservation5 extends JPanel implements ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	Font titleFnt = new Font("굴림체", Font.BOLD, 32);
 	
@@ -42,9 +45,9 @@ public class CustomReservation7 extends JFrame{
 	
 	JButton payBtn = new JButton("결제하기");
 	JButton cancelBtn = new JButton("예약취소");
-	public CustomReservation7() {
+	public CustomReservation5() {
 		setLayout(null);
-		this.getContentPane().setBackground(Color.white);
+		this.setBackground(Color.white);
 		
 		//table1 선택항공내역
 		add(titleLbl1).setBounds(390, 60, 230, 50);
@@ -103,12 +106,28 @@ public class CustomReservation7 extends JFrame{
 		
 		setSize(1000, 800);
 		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		payBtn.addActionListener(this);
+		cancelBtn.addActionListener(this);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj instanceof JButton) {
+			String btn = ((JButton) obj).getText();
+			if(btn.equals("결제하기")) {
+				JOptionPane.showMessageDialog(this, "결제창뜨고");
+				this.setVisible(false);
+				CustomFrame.reservation6.setVisible(true);
+				CustomFrame.centerPane.add(CustomFrame.reservation6);
+			} else if(btn.equals("예약취소")) {
+				this.setVisible(false);
+				CustomFrame.plan.setVisible(true);
+			} 
+		}
+		
 	}
 
-	public static void main(String[] args) {
-		new CustomReservation7();
-
-	}
+	
 
 }

@@ -1,13 +1,16 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CustomPayment extends JFrame{
+public class CustomPayment extends JPanel implements ActionListener{ 
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	
 	JLabel amountLbl1 = new JLabel("총 운임");
@@ -74,14 +77,38 @@ public class CustomPayment extends JFrame{
 			cancelBtn.setBackground(new Color(0,130,255));
 			cancelBtn.setForeground(Color.white);
 			
-		setSize(400, 450);
-		setVisible(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		payBtn.addActionListener(this);
+		cancelBtn.addActionListener(this);
+		//setSize(400, 450);
+		//setVisible(true);
+		//setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
-	public static void main(String[] args) {
-		new CustomPayment();
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if(obj instanceof JButton) {
+			String btnStr = ((JButton) obj).getText();
+			if(btnStr.equals("결제")) {
+				JOptionPane.showMessageDialog(this, "결제가 완료되었습니다.");
+				
+				this.setVisible(false);
+				CustomFrame.plan.setVisible(true);
+				CustomFrame.centerPane.add(CustomFrame.plan);
+			}else if(btnStr.equals("취소")) {
+				JOptionPane.showMessageDialog(this, "결제를 취소하고 첫페이지로 돌아갑니다.");
+				this.setVisible(false);
+				CustomFrame.plan.setVisible(true);
+				CustomFrame.centerPane.add(CustomFrame.plan);
+			}
+		}
+		
 	}
+
+//	public static void main(String[] args) {
+//		new CustomPayment();
+//
+//	}
 
 }
