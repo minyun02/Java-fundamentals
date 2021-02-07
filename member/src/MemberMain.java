@@ -125,7 +125,7 @@ public class MemberMain extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent ae) {
 		String eventBtn = ae.getActionCommand();
-		if (eventBtn.equals("Search")) {// 검
+		if (eventBtn.equals("Search")) {// 검색
 			memberSearch();
 		} else if (eventBtn.equals("전체목록")) {
 			getMemberAll();
