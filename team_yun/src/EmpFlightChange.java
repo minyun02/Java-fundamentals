@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +17,13 @@ import javax.swing.table.DefaultTableModel;
 public class EmpFlightChange extends JPanel{
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	
-	JButton calBtn = new JButton(new ImageIcon("img/cal.png"));
-	JLabel bcpLbl = new JLabel("BCP");
+	ImageIcon icon = new ImageIcon("img/calendar.png");
+	Image im = icon.getImage();
+	Image im2 = im.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+	ImageIcon icon2 = new ImageIcon(im2);
+	JButton calBtn = new JButton(icon2);
+	
+	JLabel bcpLbl = new JLabel("AC");
 	JTextField tf1 = new JTextField(10);
 	
 	JLabel depLbl = new JLabel("출발지");
@@ -57,7 +63,7 @@ public class EmpFlightChange extends JPanel{
 			calBtn.setBorderPainted(false);
 			calBtn.setContentAreaFilled(false);
 			calBtn.setFocusPainted(false);
-		add(bcpLbl).setBounds(250, 100, 50, 35);
+		add(bcpLbl).setBounds(260, 100, 80, 35);
 			bcpLbl.setFont(fnt);
 		add(tf1).setBounds(285, 105, 100, 25);
 			tf1.setFont(fnt);

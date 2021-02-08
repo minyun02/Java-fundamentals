@@ -12,7 +12,7 @@ public class CustomBookingChange1DAO extends DBConn {
 		
 		List<CustomBookingChange1VO> lst = new ArrayList<CustomBookingChange1VO>();
 		try {
-			getConn();  		//출발잀(날짜) 들어가야함
+			getConn();  		//출발일(날짜) 들어가야함
 			sql = "";
 			
 			pstmt = conn.prepareStatement(sql);

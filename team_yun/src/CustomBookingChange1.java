@@ -99,8 +99,8 @@ public class CustomBookingChange1 extends JPanel implements ActionListener, Mous
 			
 		////table
 		String test[][] = {
-					{"서울","호놀룰루","20210202","20210228","BCP0836","190000","190","3800","111"},
-					{"서울","호놀룰루","20210202","20210228","BCP0836","190000","190","3800","111"}
+					{"YY510D","20210202","AC123","인천","INC","19:45","런던","LND","10:30"},
+					{"WDW874","20210218","AC987","런던","LND","08:30","인천","INC","17:50"}
 		};
 		model = new DefaultTableModel(test,booking);
 		table = new JTable(model);
@@ -167,8 +167,22 @@ public class CustomBookingChange1 extends JPanel implements ActionListener, Mous
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void mouseReleased(MouseEvent me) {
+		if(me.getButton() ==1) {
+			int row = table.getSelectedRow();
+			numLbl2.setText((String)model.getValueAt(row, 0));
+			dateLbl2.setText((String)model.getValueAt(row, 1));
+			
+			flightNumLbl.setText((String)model.getValueAt(row, 2));
+			
+			depLbl.setText((String)model.getValueAt(row, 3));
+			depALbl.setText((String)model.getValueAt(row, 4));
+			depTimeLbl.setText((String)model.getValueAt(row, 5));
+			
+			desLbl.setText((String)model.getValueAt(row, 6));
+			desALbl.setText((String)model.getValueAt(row, 7));
+			arrTimeLbl.setText((String)model.getValueAt(row, 8));
+		}
 		
 	}
 
