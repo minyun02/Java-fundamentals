@@ -41,18 +41,26 @@ public class EmpFlightChange extends JPanel{
 	
 	//
 	JLabel foodLbl = new JLabel("기내식");
-	JComboBox<String> cb1;
-	String[] food = {"볶음밥,파스타 세트", "한식", "중식", "하외이식"};
+		JLabel korFoodLbl = new JLabel("한식");
+			JComboBox<String> korFoodBox;
+			String[] korFoodStr = {"비빔밥", "떡갈비", "불고기"};
+		JLabel chineseFoodLbl = new JLabel("중식");
+			JComboBox<String> chineseFoodBox;
+			String[] chineseFoodStr = {"베이징면","사천볶음밥", "광저우생선"};
+		JLabel westFoodLbl = new JLabel("양식");
+			JComboBox<String> westFoodBox;
+			String[] westFoodStr = {"파스타", "찹스테이크", "토마토스튜"};
+	
 	JLabel delayLbl = new JLabel("지연");
 	JCheckBox delayCheckBox = new JCheckBox("", false);
 	JLabel depTimeLbl = new JLabel("출발시간");
 	JTextField depTf = new JTextField(10);
-	JLabel arrTimeLbl = new JLabel("~ 도착시간");
+	JLabel arrTimeLbl = new JLabel("~   도착시간");
 	JTextField arrTf = new JTextField(10);
 	JLabel cancelLbl = new JLabel("결항");
 	JComboBox<String> cancelState;
 	String[] state = {"기상악화", "기장실종", "기타사유"};
-	JCheckBox cancel = new JCheckBox("", false);
+	JCheckBox cancelBox = new JCheckBox("", false);
 	
 	JButton btn2 = new JButton("설정완료");
 	public EmpFlightChange() {
@@ -89,39 +97,47 @@ public class EmpFlightChange extends JPanel{
 			sp.getViewport().setBackground(Color.white);
 		
 		//기내식
-		add(foodLbl).setBounds(350, 480, 60,35);
+		add(foodLbl).setBounds(200, 480, 60,35);
 			foodLbl.setFont(fnt);
-		cb1 = new JComboBox<String> (food);
-		add(cb1).setBounds(450, 481, 180, 35);
-			cb1.setFont(fnt);
-			cb1.setBackground(Color.white);
+		//한식
+		add(korFoodLbl).setBounds(280, 480,60,35); korFoodLbl.setFont(fnt);
+		korFoodBox = new JComboBox<String> (korFoodStr);
+		add(korFoodBox).setBounds(320, 483, 100, 25);korFoodBox.setFont(fnt);korFoodBox.setBackground(Color.white);
 			//cb1.setAlignmentX(CENTER_ALIGNMENT);
+		//중식
+		add(chineseFoodLbl).setBounds(440,480, 60,35); chineseFoodLbl.setFont(fnt);
+		chineseFoodBox = new JComboBox<String>(chineseFoodStr);
+		add(chineseFoodBox).setBounds(480,483, 100, 25); chineseFoodBox.setFont(fnt);chineseFoodBox.setBackground(Color.white);
+		//양식
+		add(westFoodLbl).setBounds(600,480, 60,35); westFoodLbl.setFont(fnt);
+		westFoodBox = new JComboBox<String>(westFoodStr);
+		add(westFoodBox).setBounds(640,483, 100,25); westFoodBox.setFont(fnt);westFoodBox.setBackground(Color.white);
 		
 		//지연 상태
-		add(delayLbl).setBounds(350, 515, 50, 35);
+		add(delayLbl).setBounds(200, 515, 50, 35);
 			delayLbl.setFont(fnt);
-		add(delayCheckBox).setBounds(450, 524, 17, 17);
+		add(delayCheckBox).setBounds(280, 524, 17, 17);
 			delayCheckBox.setBackground(Color.white);
-		add(depTimeLbl).setBounds(480,515, 60, 35);
+		add(depTimeLbl).setBounds(320,517, 60, 35);
 			depTimeLbl.setFont(fnt);
-		add(depTf).setBounds(545, 521, 80, 25);
+		add(depTf).setBounds(400, 521, 80, 25);
 			depTf.setFont(fnt);
-		add(arrTimeLbl).setBounds(630, 516, 80, 35);
+		add(arrTimeLbl).setBounds(500, 516, 100, 35);
 			arrTimeLbl.setFont(fnt);
-		add(arrTf).setBounds(710, 521, 80, 25);
+		add(arrTf).setBounds(610, 521, 80, 25);
 			arrTf.setFont(fnt);
 			
 		//결항 상태
-		add(cancelLbl).setBounds(350, 550, 50, 35);
+		add(cancelLbl).setBounds(200, 550, 50, 35);
 			cancelLbl.setFont(fnt);
-		add(cancel).setBounds(450, 559, 17, 17);
-			cancel.setBackground(Color.white);
+		add(cancelBox).setBounds(280, 559, 17, 17);
+		cancelBox.setBackground(Color.white);
 		cancelState = new JComboBox<String>(state);
-		add(cancelState).setBounds(480,552, 150, 30);
+		add(cancelState).setBounds(320,555, 150, 25);
 			cancelState.setFont(fnt);
 			cancelState.setBackground(Color.white);
 			
-		add(btn2).setBounds(480, 600, 100,30);
+		add(btn2).setBounds(440, 600, 100,30);
 			btn2.setFont(fnt);
 			btn2.setForeground(Color.white);
 			btn2.setBackground(new Color(255,128,128));

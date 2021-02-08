@@ -28,9 +28,20 @@ public class EmpFlightAdd  extends JPanel{
 	JTextField arrTimeTf = new JTextField(30);
 	JLabel seatLbl = new JLabel("좌석수");
 	JTextField seatTf = new JTextField(30);
-	JLabel foodLbl = new JLabel("기내식 종류");
-	JComboBox<String> cb1;
-	String[] food = {"볶음밥,파스타 세트", "한식", "중식", "하외이식"};
+	
+	JLabel foodLbl = new JLabel("기내식");
+		JComboBox<String> korFoodBox;
+		String[] korFoodStr = {"비빔밥", "떡갈비", "불고기"};
+		
+		JComboBox<String> chineseFoodBox;
+		String[] chineseFoodStr = {"베이징면","사천볶음밥", "광저우생선"};
+		
+		JComboBox<String> westFoodBox;
+		String[] westFoodStr = {"파스타", "찹스테이크", "토마토스튜"};
+	
+	
+	
+	
 	JLabel empLbl = new JLabel("사원");
 	JComboBox<String> emp1;
 	String[] pilot1 = {"최다니엘", "놀란", "피터", "알렉스", "루니"};
@@ -72,10 +83,18 @@ public class EmpFlightAdd  extends JPanel{
 		add(seatLbl).setBounds(x, 450, 100,30); add(seatTf).setBounds(x1, 450, 250,30);
 			seatLbl.setFont(fnt);
 			seatTf.setFont(fnt);
-		add(foodLbl).setBounds(x, 500, 100,30); cb1 = new JComboBox<String>(food); cb1.setBackground(Color.white);
-		add(cb1).setBounds(x1, 500, 250,30);
-			foodLbl.setFont(fnt);
-			cb1.setFont(fnt);
+		add(foodLbl).setBounds(x, 500, 100,30); 
+		
+		foodLbl.setFont(fnt);
+		korFoodBox = new JComboBox<String>(korFoodStr); korFoodBox.setBackground(Color.white);korFoodBox.setFont(fnt);
+		add(korFoodBox).setBounds(x1, 500, 100,30);
+		
+		chineseFoodBox = new JComboBox<String>(chineseFoodStr); chineseFoodBox.setBackground(Color.white);chineseFoodBox.setFont(fnt);
+		add(chineseFoodBox).setBounds(530,500, 100,30);
+		
+		westFoodBox = new JComboBox<String>(westFoodStr); westFoodBox.setBackground(Color.white); westFoodBox.setFont(fnt);
+		add(westFoodBox).setBounds(640,500, 100,30);
+		
 		add(empLbl).setBounds(x, 550, 100,30); 
 		emp1 = new JComboBox<String>(pilot1); emp1.setBackground(Color.white);
 		add(emp1).setBounds(x1, 550, 100,30);
