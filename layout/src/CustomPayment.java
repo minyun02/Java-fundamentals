@@ -1,13 +1,20 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class CustomPayment extends JFrame{
+public class CustomPayment extends JFrame implements ActionListener, MouseListener, WindowListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	
 	JLabel amountLbl1 = new JLabel("총 운임");
@@ -20,6 +27,8 @@ public class CustomPayment extends JFrame{
 	
 	JLabel cardNumLbl = new JLabel("카드번호");
 	JTextField cardNumTf= new JTextField(20);
+	JLabel bankLbl = new JLabel("우리은행");
+	JLabel numLbl = new JLabel("0001-010-05-0002");
 	
 	JLabel mileageLbl1 = new JLabel("적립 마일리지");
 	JLabel mileageLbl2 = new JLabel("570");
@@ -51,8 +60,9 @@ public class CustomPayment extends JFrame{
 			paymentBox.setBackground(Color.white);
 			
 		add(cardNumLbl).setBounds(60, 160, 80, 25); cardNumLbl.setFont(fnt);
-		add(cardNumTf).setBounds(200,160, 160, 25);	cardNumTf.setFont(fnt);
-			cardNumTf.setBackground(Color.white);
+		add(cardNumTf).setBounds(200,160, 160, 25);	cardNumTf.setFont(fnt); cardNumTf.setBackground(Color.white);
+		add(bankLbl).setBounds(60, 160, 80, 25); bankLbl.setFont(fnt); bankLbl.setVisible(false);
+		add(numLbl).setBounds(200,160, 160, 25);numLbl.setFont(fnt); numLbl.setVisible(false);
 			
 		add(mileageLbl1).setBounds(60,190, 100,25); mileageLbl1.setFont(fnt);
 		add(mileageLbl2).setBounds(200,190, 60,25); mileageLbl2.setFont(fnt);
@@ -76,12 +86,129 @@ public class CustomPayment extends JFrame{
 			
 		setSize(400, 450);
 		setVisible(true);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		//이벤트
+		paymentBox.addActionListener(this);
+		payBtn.addMouseListener(this);
+		cancelBtn.addMouseListener(this);
+		addWindowListener(this);
 	}
 
 	public static void main(String[] args) {
 		new CustomPayment();
 
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		Object obj = ae.getSource();
+		if(obj instanceof JComboBox) {
+			String comboItem = (String)paymentBox.getSelectedItem();
+			System.out.println(comboItem);
+			
+			if(comboItem.equals("계좌이체")) {
+				cardNumLbl.setVisible(false);
+				bankLbl.setVisible(true);
+				cardNumTf.setVisible(false);
+				numLbl.setVisible(true);
+			}else if(comboItem.equals("카드결제")) {
+				bankLbl.setVisible(false);
+				cardNumLbl.setVisible(true);
+				numLbl.setVisible(false);
+				cardNumTf.setVisible(true);
+			}
+		}
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		Object obj = me.getSource();
+		if(obj instanceof JButton) {
+			String btnName = ((JButton) obj).getText();
+			if(btnName.equals("결제")) {
+				JOptionPane.showMessageDialog(this, "결제가 완료되었습니다");
+				this.setVisible(false);
+				paymentState = 1; // 1이면 결제를 했다는 뜻이니까 cbc4로 화면 전환 가자!!
+				System.out.println(paymentState);
+				CustomFrame.bookingChange3.setVisible(false);
+				CustomFrame.bookingChange4.setVisible(true);
+				CustomFrame.centerPane.add(CustomFrame.bookingChange4);
+			}
+		}
+		
+	}
+	
+	@Override
+	public void windowOpened(WindowEvent e) {
+		paymentWindowState = 1;
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		paymentWindowState = 0;
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -7,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class CustomChangePayment extends JFrame{
+public class CustomChangePayment extends JFrame implements ActionListener{
 	Font fnt = new Font("굴림체", Font.BOLD, 14);
 	
 	JLabel amountLbl1 = new JLabel("초기 운임");
@@ -39,6 +41,10 @@ public class CustomChangePayment extends JFrame{
 	
 	JButton payBtn = new JButton("결제");
 	JButton cancelBtn = new JButton("취소");
+	
+	//이벤트용 변수
+	static int payBtnClicked = 0;
+	static int cancelBtnClicked = 8;
 	
 	public CustomChangePayment() {
 		setLayout(null);
@@ -84,6 +90,12 @@ public class CustomChangePayment extends JFrame{
 	public static void main(String[] args) {
 		new CustomChangePayment();
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
