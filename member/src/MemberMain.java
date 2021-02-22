@@ -314,6 +314,7 @@ public class MemberMain extends JFrame implements ActionListener {
 	public void memberSearch() {
 		// 검색어에 입력된 데이터
 		String searchWord = searchTf.getText();
+		System.out.println(searchWord);
 		if (searchWord.equals("")) {// 검색어가 없을때
 			JOptionPane.showMessageDialog(this, "검색어를 입력후 검색하세요.");
 		} else { // 검색어가 있을때
